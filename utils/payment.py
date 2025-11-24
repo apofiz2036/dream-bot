@@ -24,6 +24,11 @@ async def payment_message(update, context):
 
 async def get_link_topayment(update, context):
     user_id = update.effective_user.id
+    success, public_id, limits = await get_user_info_by_user_id(user_id)
+    if not success:
+        await update.message.reply_text("Ошибка: не удалось найти ваши данные.")
+        await main_menu(update, context)
+        return
 
     text = update.message.text.strip()
     try:
@@ -35,7 +40,7 @@ async def get_link_topayment(update, context):
         await main_menu(update, context)
         return
 
-    payment_url, payment_id = await create_payment(user_id, amount)
+    payment_url, payment_id = await create_payment(user_id, amount, public_id)
 
     context.user_data.pop('mode', None)
 

@@ -5,7 +5,7 @@ Configuration.account_id = YOOKASSA_SHOP_ID
 Configuration.secret_key = YOOKASSA_SECRET_KEY
 
 
-async def create_payment(user_id, amount):
+async def create_payment(user_id, amount, public_id):
     Configuration.configure(Configuration.account_id, Configuration.secret_key, sandbox=True)
 
     payment_data = {
@@ -18,9 +18,10 @@ async def create_payment(user_id, amount):
             "return_url": "https://t.me/your_bot_username"
         },
         "capture": True,
-        "description": f"Пополнение лимитов для пользователя {user_id}",
+        "description": f"Пополнение лимитов для пользователя {public_id}",
         "metadata": {
-            "user_id": user_id
+            "public_id": public_id,
+            "bot_name": "dream_bot"
         }
     }
 
