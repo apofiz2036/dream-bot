@@ -27,6 +27,8 @@ async def payment_message(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
 Вы получите платёжный чек — всё прозрачно и надёжно.✅
 
+Стоимость одного лимита один рубль
+
 Пример: 150""",
         reply_markup=reply_markup
     )
